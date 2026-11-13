@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Fallen — Admin</title>
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+  <main>
+    <h1>The Fallen — Admin</h1>
+
+    <section id="loginBox">
+      <label for="code">Admin code (printed in the server window)</label>
+      <input id="code" autocomplete="off">
+      <button id="loginBtn">Unlock</button>
+      <div id="loginMsg" class="err"></div>
+    </section>
+
+    <div id="app" hidden>
+      <section>
+        <form id="form">
+          <label for="name">Name</label>
+          <input id="name" maxlength="80" required>
+          <div class="row">
+            <div>
+              <label for="started">Started</label>
+              <input id="started" type="date" required>
+            </div>
+            <div>
+              <label for="left">Left</label>
+              <input id="left" type="date" required>
+            </div>
+          </div>
+
+          <label for="photo">Photo</label>
+          <input id="photo" type="file" accept="image/*" required>
+          <img id="preview" alt="Photo preview" hidden>
+          <label><input type="checkbox" id="cropOn">Crop photo (optional)</label>
+          <div id="cropper" hidden>
+            <div id="cropBox"><img id="cropImg" alt="" draggable="false"></div>
+            <small>Drag the photo to place the face.</small>
+            <label for="zoom">Zoom</label>
+            <input id="zoom" type="range" min="1" max="4" step="0.01" value="1">
+          </div>
+
+          <button type="submit">Add to the wall</button>
+          <div id="msg" role="status"></div>
+        </form>
+      </section>
+
+      <section>
+        <ul id="list"></ul>
+        <button class="secondary" id="testBtn">Test fire on TV (replays newest)</button>
+      </section>
+
+      <section>
+        <h2>TV settings</h2>
+        <label for="vol">Volume: <span id="volLabel"></span></label>
+        <input id="vol" type="range" min="0" max="100" step="1">
+        <label><input type="checkbox" id="nightOn">Night mode: black screen outside these hours</label>
+        <div class="row">
+          <div>
+            <label for="dayStart">Screen on from</label>
+            <input id="dayStart" type="time">
+          </div>
+          <div>
+            <label for="dayEnd">Until</label>
+            <input id="dayEnd" type="time">
+          </div>
+        </div>
+        <div id="setMsg" role="status"></div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // The page needs the server. Opened straight from disk, say so instead of showing a dead form.
+    if (location.protocol === 'file:') {
+      document.querySelector('main').innerHTML = '<h1>Open this through the server</h1><p>Run <code>node server.js</code>, then open the Admin address it prints (for example http://localhost:8080/admin).</p>';
+    }
+  </script>
+  <script type="module" src="/admin/main.js"></script>
+</body>
+</html>

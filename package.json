@@ -1,0 +1,13 @@
+{
+  "name": "fallen-wall",
+  "version": "1.0.0",
+  "description": "TV wall for people who left the company: cannons, portrait and music when someone is added.",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

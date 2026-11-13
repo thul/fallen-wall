@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Fallen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap">
+  <link rel="stylesheet" href="/tv.css">
+</head>
+<body>
+  <canvas id="sky"></canvas>
+
+  <!-- Idle: the overview of everyone -->
+  <div id="idle" class="safe">
+    <h1>THE FALLEN</h1>
+    <div id="grid"></div>
+    <div id="count"></div>
+  </div>
+
+  <!-- The portrait of a newly added person -->
+  <div id="announce" class="safe"></div>
+
+  <div id="flash"></div>
+  <div id="night"></div>
+  <div id="status" hidden></div>
+
+  <div id="soundUnlock">
+    <div>PRESS OK TO BEGIN</div>
+    <small>Sound needs one button press after the page loads.</small>
+  </div>
+
+  <script>
+    // The page needs the server. Opened straight from disk, say so instead of showing a dead wall.
+    if (location.protocol === 'file:') {
+      document.body.innerHTML = '<p class="needs-server">Open this through the server: run node server.js and open the TV address it prints.</p>';
+    }
+  </script>
+  <script type="module" src="/tv/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+# The Pi runs these scripts; Windows line endings would break them.
+*.sh text eol=lf

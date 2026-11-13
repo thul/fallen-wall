@@ -1,0 +1,222 @@
+/* The admin page. Plain and phone-friendly; follows the device's light or dark theme. */
+
+:root {
+  color-scheme: light dark;
+  --bg: #f5f6f8;
+  --card: #fff;
+  --ink: #1a1d23;
+  --muted: #667;
+  --line: #d8dbe0;
+  --accent: #2b5fd9;
+  --bad: #c0392b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111318;
+    --card: #1b1e25;
+    --ink: #e8eaf0;
+    --muted: #99a;
+    --line: #2c3039;
+    --accent: #6d97ff;
+    --bad: #ff6b5b;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Elements with their own display value would otherwise ignore the hidden attribute. */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.4 system-ui, sans-serif;
+}
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+h1 {
+  margin: 8px 0 16px;
+  font-size: 22px;
+}
+
+h2 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+section {
+  margin-bottom: 16px;
+  padding: 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+small {
+  color: var(--muted);
+}
+
+.err {
+  color: var(--bad);
+}
+
+/* ---------- Form fields ---------- */
+
+label {
+  display: block;
+  margin: 12px 0 4px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+input[type='checkbox'] {
+  width: auto;
+  margin-right: 6px;
+}
+
+input[type='range'] {
+  padding: 0;
+  border: 0;
+}
+
+/* Two fields side by side. */
+.row {
+  display: flex;
+  gap: 12px;
+}
+
+.row > div {
+  flex: 1;
+  min-width: 0;
+}
+
+#msg,
+#setMsg {
+  min-height: 1.4em;
+  margin-top: 12px;
+}
+
+/* ---------- Buttons ---------- */
+
+button {
+  margin-top: 16px;
+  padding: 10px 16px;
+  font: inherit;
+  color: #fff;
+  background: var(--accent);
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+button.secondary {
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--line);
+}
+
+button.del {
+  margin: 0;
+  padding: 6px 10px;
+  color: var(--bad);
+  background: transparent;
+  border: 1px solid var(--line);
+}
+
+/* ---------- Photo preview and crop box ---------- */
+
+#preview {
+  display: block;
+  width: 120px;
+  height: 140px;
+  margin-top: 8px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Keep this size in step with BOX_WIDTH and BOX_HEIGHT in admin/photo.js. */
+#cropBox {
+  position: relative;
+  width: 250px;
+  height: 300px;
+  margin-top: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  cursor: grab;
+  touch-action: none; /* dragging moves the photo, not the page */
+}
+
+/* Moved and scaled by admin/photo.js. */
+#cropImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+  transform-origin: 0 0;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ---------- The list of people ---------- */
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+}
+
+li:first-child {
+  border-top: 0;
+}
+
+li img {
+  flex: none;
+  width: 44px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+li .who {
+  flex: 1;
+  min-width: 0;
+}
+
+li .who small {
+  display: block;
+}
